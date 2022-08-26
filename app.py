@@ -1,7 +1,8 @@
 import os
+import re
 import shutil
 from env import ENV
-from utils import getApps, mkFileIfNot, mkdirIfNot, templated
+from utils import getApps, lastImportIndex, mkFileIfNot, mkdirIfNot, templated
 
 
 class App:
@@ -30,6 +31,15 @@ class App:
                 print('temlpate "{templatePath}" already exists /_/')
 
 
+    def getModels(self):
+        with open(f'{self.name}/models.py') as f:
+            matches = re.findall(r'class +([A-z]+)(?= *\((?:models.)?Model\) *\:)', f.read())
+            return matches
+
+
+    def addModel(self, name):
+        i = lastImportIndex()
+        
 
 
     def remove(self):

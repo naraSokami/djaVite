@@ -1,16 +1,25 @@
 from app import App
+from model import Column
+from utils import getLevels
 
 
 ### TODO ###
-# 
-# 
+# make templates the future
+# init()
+    # create main_app
+
+# app.addModel()
+# app.getModels()
 
 
 
 app = App('pastek')
-app.addTemplate('index')
 
 
+col = Column('name', 'int', options={'min': 0, 'max': 10})
+# print(col.str())
+
+print(getLevels('pastek/models.py'))
 
 
 # def addView(name, app):

@@ -1,4 +1,5 @@
 import os, shutil
+import re
 
 
 
@@ -54,6 +55,23 @@ def lastImportIndex(path):
                 break
     return last
     
+
+def getLevels(path):
+    lines = getLines(path)
+    lv = 0
+    levels = []
+
+    for i in range(len(lines)):
+        t = lv
+        if not lines[i].strip() == '':
+            t = re.findall(r'^(?:    )+', lines[i])
+            t = len(t[0]) // 4 if t else 0
+            lv = 0 if t < lv else t
+
+        levels.append(t)
+
+    return levels
+        
 
 def use(path, importStr, v=False):
     i = lastImportIndex(path) + 1
